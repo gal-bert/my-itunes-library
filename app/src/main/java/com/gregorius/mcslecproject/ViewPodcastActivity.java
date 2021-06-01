@@ -17,29 +17,29 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ViewMusicActivity extends AppCompatActivity {
+public class ViewPodcastActivity extends AppCompatActivity {
 
-    RecyclerView rvMusic;
+    RecyclerView rvMedia;
     EditText etKeyword;
     Button btnSearch;
 
     MediaAdapter mediaAdapter;
-    List<MediaResponse> listMusic;
+    List<MediaResponse> listMedia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_music);
+        setContentView(R.layout.activity_view_podcast);
 
-        rvMusic = findViewById(R.id.rvMusic);
+        rvMedia = findViewById(R.id.rvMedia);
         etKeyword = findViewById(R.id.etKeyword);
         btnSearch = findViewById(R.id.btnSearch);
 
         LinearLayoutManager llManager = new LinearLayoutManager(this);
-        rvMusic.setLayoutManager(llManager);
+        rvMedia.setLayoutManager(llManager);
 
         mediaAdapter = new MediaAdapter(this);
-        rvMusic.setAdapter(mediaAdapter);
+        rvMedia.setAdapter(mediaAdapter);
 
         // Loading Data for the first time with the term 'love'
         search("love");
@@ -51,22 +51,21 @@ public class ViewMusicActivity extends AppCompatActivity {
                 search(term);
             }
         });
-
     }
 
     private void search(String term) {
         Retrofit retrofit = APIClient.getRetrofit();
         iTunesService service = retrofit.create(iTunesService.class);
 
-        Call<MediaListResponse> call = service.searchMedia("music", term);
+        Call<MediaListResponse> call = service.searchMedia("podcast", term);
         call.enqueue(new Callback<MediaListResponse>() {
             @Override
             public void onResponse(Call<MediaListResponse> call, Response<MediaListResponse> response) {
                 if (response.isSuccessful()) {
                     MediaListResponse mediaListResponse = response.body();
-                    listMusic = mediaListResponse.getResults();
+                    listMedia = mediaListResponse.getResults();
 
-                    mediaAdapter.setListMedia((ArrayList<MediaResponse>) listMusic);
+                    mediaAdapter.setListMedia((ArrayList<MediaResponse>) listMedia);
 
                     // Log.i("MY_TAG", "onResponse: " + listMusic.get(0).getTrackName());
                 }

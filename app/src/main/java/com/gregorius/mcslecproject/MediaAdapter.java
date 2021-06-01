@@ -14,25 +14,25 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> {
+public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> {
 
     protected static Context ctx;
     private ArrayList<MediaResponse> listMedia;
 
-    public MusicAdapter(Context ctx) {
-        MusicAdapter.ctx = ctx;
+    public MediaAdapter(Context ctx) {
+        MediaAdapter.ctx = ctx;
         listMedia = new ArrayList<>();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(MusicAdapter.ctx).inflate(R.layout.item_row_music, parent, false);
+        View v = LayoutInflater.from(MediaAdapter.ctx).inflate(R.layout.item_row_media, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MusicAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MediaAdapter.ViewHolder holder, int position) {
         MediaResponse media = getListMedia().get(position);
 
         Glide.with(ctx).load(media.getArtworkUrl100()).into(holder.artworkUrl100);
