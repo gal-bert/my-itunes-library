@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class ViewMusicActivity extends AppCompatActivity {
     RecyclerView rvMusic;
     EditText etKeyword;
     Button btnSearch;
+    ProgressBar progressBar;
 
     MediaAdapter mediaAdapter;
     List<MediaResponse> listMusic;
@@ -34,6 +36,10 @@ public class ViewMusicActivity extends AppCompatActivity {
         rvMusic = findViewById(R.id.rvMusic);
         etKeyword = findViewById(R.id.etKeyword);
         btnSearch = findViewById(R.id.btnSearch);
+        progressBar = findViewById(R.id.progressBar);
+
+        // Hide progress bar
+        progressBar.setVisibility(ProgressBar.GONE);
 
         LinearLayoutManager llManager = new LinearLayoutManager(this);
         rvMusic.setLayoutManager(llManager);
@@ -55,6 +61,8 @@ public class ViewMusicActivity extends AppCompatActivity {
     }
 
     private void search(String term) {
+        progressBar.setVisibility(ProgressBar.VISIBLE);
+
         Retrofit retrofit = APIClient.getRetrofit();
         iTunesService service = retrofit.create(iTunesService.class);
 
@@ -62,6 +70,8 @@ public class ViewMusicActivity extends AppCompatActivity {
         call.enqueue(new Callback<MediaListResponse>() {
             @Override
             public void onResponse(Call<MediaListResponse> call, Response<MediaListResponse> response) {
+                progressBar.setVisibility(ProgressBar.GONE);
+
                 if (response.isSuccessful()) {
                     MediaListResponse mediaListResponse = response.body();
                     listMusic = mediaListResponse.getResults();
@@ -74,7 +84,7 @@ public class ViewMusicActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MediaListResponse> call, Throwable t) {
-
+                progressBar.setVisibility(ProgressBar.GONE);
             }
         });
     }
