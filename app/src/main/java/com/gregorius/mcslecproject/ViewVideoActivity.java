@@ -4,11 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +40,34 @@ public class ViewVideoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_video);
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.menuVideo);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                Intent intent;
+                switch (item.getItemId()) {
+                    case R.id.menuMusic:
+                        intent = new Intent(ViewVideoActivity.this, ViewMusicActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        finish();
+                        break;
+
+                    case R.id.menuVideo:
+                        break;
+
+                    case R.id.menuPodcast:
+                        intent = new Intent(ViewVideoActivity.this, ViewPodcastActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
+
         rvMedia = findViewById(R.id.rvMedia);
         etKeyword = findViewById(R.id.etKeyword);
         btnSearch = findViewById(R.id.btnSearch);
@@ -47,14 +82,20 @@ public class ViewVideoActivity extends AppCompatActivity {
         mediaAdapter = new MediaAdapter(this);
         rvMedia.setAdapter(mediaAdapter);
 
-        // Loading Data for the first time with the term 'love'
-        search("love");
+        // Loading Data for the first time with the term from Shared Preferences
+        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String term = sPrefs.getString("DEFAULT_SEARCH", null);
+        search(term);
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String term = etKeyword.getText().toString();
-                search(term);
+                if(term.isEmpty()){
+                    etKeyword.setError("Term must be filled");
+                    etKeyword.requestFocus();
+                }
+                else search(term);
             }
         });
     }
@@ -87,4 +128,23 @@ public class ViewVideoActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.top_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menuBookmark) {
+            /*TODO: Assign to bookmark Activity*/
+//            startActivity(new Intent(this, .class));
+        }
+        if (item.getItemId() == R.id.menuSettings) {
+            startActivity(new Intent(ViewVideoActivity.this, SettingsActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
