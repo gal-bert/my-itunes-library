@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Appearance">
+        <SwitchPreferenceCompat
+            app:key="darkMode"
+            app:title="Dark Mode" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Search">
+
+        <Preference
+            app:key="reset"
+            app:title="Reset default search term"
+            />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

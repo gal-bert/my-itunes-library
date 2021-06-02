@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuMusic"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_library_music_24"
+        android:title="Music"/>
+    <item
+        android:id="@+id/menuVideo"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_video_library_24"
+        android:title="Video"/>
+    <item
+        android:id="@+id/menuPodcast"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_radio_24"
+        android:title="Podcast"/>
+</menu>
