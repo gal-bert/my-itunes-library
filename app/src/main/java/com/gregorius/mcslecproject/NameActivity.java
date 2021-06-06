@@ -50,7 +50,7 @@ public class NameActivity extends AppCompatActivity {
             editor.putString("DEFAULT_SEARCH", search);
             editor.apply();
 
-            Intent intent = new Intent(NameActivity.this, ViewMusicActivity.class);
+            Intent intent = new Intent(NameActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
