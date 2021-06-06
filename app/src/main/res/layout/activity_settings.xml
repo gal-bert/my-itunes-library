@@ -6,11 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
-    <fragment
-        android:id="@+id/container"
-        class="com.gregorius.mcslecproject.SettingsFragment"
+    <FrameLayout
+        android:id="@+id/settings"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

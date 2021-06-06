@@ -1,6 +1,7 @@
 package com.gregorius.mcslecproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +25,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
 
 public class MainActivity extends AppCompatActivity {
 

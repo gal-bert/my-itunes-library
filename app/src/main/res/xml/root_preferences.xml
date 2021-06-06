@@ -1,17 +1,22 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory app:title="Appearance">
-        <SwitchPreferenceCompat
-            app:key="darkMode"
-            app:title="Dark Mode" />
+    <PreferenceCategory app:title="Appearance" >
+        <CheckBoxPreference
+            app:key="DARK_MODE"
+            app:title="Dark Mode"
+            app:summaryOn="Dark Theme is activated"
+            app:summaryOff="Dark Theme is off"
+            />
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="Search">
+    <PreferenceCategory app:title="Data">
 
         <Preference
-            app:key="reset"
-            app:title="Reset default search term"
-            />
+            app:key="RESET"
+            app:title="Reset data to factory"
+            >
+        </Preference>
 
     </PreferenceCategory>
 
