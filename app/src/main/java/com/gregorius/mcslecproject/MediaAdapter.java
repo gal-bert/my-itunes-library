@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -34,12 +36,18 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MediaAdapter.ViewHolder holder, int position) {
         MediaResponse media = getListMedia().get(position);
-
         Glide.with(ctx).load(media.getArtworkUrl100()).into(holder.artworkUrl100);
 
         holder.trackId.setText(String.valueOf(media.getTrackId()));
         holder.trackName.setText(media.getTrackName());
         holder.artistName.setText(media.getArtistName());
+
+        holder.cvMedia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ctx,"" + media.getTrackName(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -62,6 +70,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
         ImageView artworkUrl100;
         TextView trackName;
         TextView artistName;
+        CardView cvMedia;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -70,6 +79,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
             artworkUrl100 = itemView.findViewById(R.id.artworkUrl100);
             trackName = itemView.findViewById(R.id.trackName);
             artistName = itemView.findViewById(R.id.artistName);
+            cvMedia = itemView.findViewById(R.id.cvMedia);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

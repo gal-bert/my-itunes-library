@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menuBookmark) {
             /*TODO: Assign to bookmark Activity*/
-//            startActivity(new Intent(this, .class));
+            startActivity(new Intent(this, BookmarksActivity.class));
         }
         if (item.getItemId() == R.id.menuSettings) {
             startActivity(new Intent(this, SettingsActivity.class));

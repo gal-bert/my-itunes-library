@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    >
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bookmark Name: "
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/etBookmarkName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvTitle"
+        />
+
+    <Button
+        android:id="@+id/btnName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/etBookmarkName"
+        android:onClick="addBookmark"
+        android:text="add"
+        />
+
+</RelativeLayout>
