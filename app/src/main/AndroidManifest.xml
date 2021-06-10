@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MCSLECProject">
-        <activity android:name=".BookmarksActivity"></activity>
+        <activity android:name=".BookmarksDetailActivity"></activity>
+        <activity android:name=".BookmarksActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter android:configChanges="uiMode">
                 <action android:name="android.intent.action.MAIN" />

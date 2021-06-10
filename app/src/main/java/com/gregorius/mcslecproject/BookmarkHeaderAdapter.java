@@ -1,6 +1,7 @@
 package com.gregorius.mcslecproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,16 @@ public class BookmarkHeaderAdapter extends RecyclerView.Adapter<BookmarkHeaderAd
                         notifyItemChanged(position);
                     }
                 });
+            }
+        });
+
+        holder.cvBookmarks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ctx, BookmarksDetailActivity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("name", vecBookmark.get(position).getBookmarkName());
+                ctx.startActivity(intent);
             }
         });
     }
