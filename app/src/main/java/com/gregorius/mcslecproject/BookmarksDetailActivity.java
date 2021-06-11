@@ -31,11 +31,11 @@ public class BookmarksDetailActivity extends AppCompatActivity {
 //        Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
         tvTitle.setText(name + " Bookmark");
 
-        bookmarkDetail = new BookmarkDetail("iTunes Store", "http://is4.mzstatic.com/image/thumb/Music122/v4/1b/83/76/1b8376aa-90a9-eae1-662d-2b24faf1bf6e/source/200x200bb.png", "The New York Times");
+        bookmarkDetail = new BookmarkDetail("iTunes Store", "http://is4.mzstatic.com/image/thumb/Music122/v4/1b/83/76/1b8376aa-90a9-eae1-662d-2b24faf1bf6e/source/200x200bb.png", "The New York Times", 1);
         db.insertBookmarkDetail(bookmarkDetail);
-        bookmarkDetail = new BookmarkDetail("The Daily", "http://is5.mzstatic.com/image/thumb/Music127/v4/21/22/5e/21225e89-71df-0f12-a8ee-33f66cfde476/source/200x200bb.png", "Mathis Entertainment, Inc.");
+        bookmarkDetail = new BookmarkDetail("The Daily", "http://is5.mzstatic.com/image/thumb/Music127/v4/21/22/5e/21225e89-71df-0f12-a8ee-33f66cfde476/source/200x200bb.png", "Mathis Entertainment, Inc.", 1);
         db.insertBookmarkDetail(bookmarkDetail);
-        bookmarkDetail = new BookmarkDetail("Kickass News", "http://is5.mzstatic.com/image/thumb/Music128/v4/d5/c6/50/d5c65035-505e-b006-48e5-be3f0f8f19f8/source/200x200bb.png", "TED");
+        bookmarkDetail = new BookmarkDetail("Kickass News", "http://is5.mzstatic.com/image/thumb/Music128/v4/d5/c6/50/d5c65035-505e-b006-48e5-be3f0f8f19f8/source/200x200bb.png", "TED", 2);
         db.insertBookmarkDetail(bookmarkDetail);
 
         getRvData();

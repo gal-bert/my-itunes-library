@@ -41,7 +41,7 @@ public class BookmarkDetailAdapter extends RecyclerView.Adapter<BookmarkDetailAd
     @Override
     public void onBindViewHolder(@NonNull BookmarkDetailAdapter.ViewHolder holder, int position) {
         BookmarkDetail bookmarkDetail = vecBookmarkDetail.get(position);
-        Glide.with(ctx).load(bookmarkDetail.getDetailImage()).into(holder.artworkUrl100);
+//        Glide.with(ctx).load(bookmarkDetail.getDetailImage()).into(holder.artworkUrl100);
         holder.trackName.setText(bookmarkDetail.getDetailTitle());
         holder.artistName.setText(bookmarkDetail.getDetailArtist());
 

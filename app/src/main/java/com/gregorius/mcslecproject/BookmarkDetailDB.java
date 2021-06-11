@@ -21,6 +21,7 @@ public class BookmarkDetailDB {
         cv.put(DBHelper.FIELD_BOOKMARK_DETAIL_TITLE, bookmarkDetail.getDetailTitle());
         cv.put(DBHelper.FIELD_BOOKMARK_DETAIL_IMAGE, bookmarkDetail.getDetailImage());
         cv.put(DBHelper.FIELD_BOOKMARK_DETAIL_ARTIST, bookmarkDetail.getDetailArtist());
+        cv.put(DBHelper.FIELD_BOOKMARK_DETAIL_F_KEY, bookmarkDetail.getDetailId());
         db.insert(DBHelper.TABLE_BOOKMARK_DETAIL, null, cv);
 
         db.close();
@@ -40,7 +41,8 @@ public class BookmarkDetailDB {
                 String title = cursor.getString(1);
                 String image = cursor.getString(2);
                 String artist = cursor.getString(3);
-                BookmarkDetail bookmarkDetail = new BookmarkDetail(id, title, image, artist);
+                Integer bookmarkId = cursor.getInt(4);
+                BookmarkDetail bookmarkDetail = new BookmarkDetail(id, title, image, artist, bookmarkId);
                 vecBookmarkDetail.add(bookmarkDetail);
             }while(cursor.moveToNext());
         }
