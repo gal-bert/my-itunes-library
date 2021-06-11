@@ -10,8 +10,8 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Bookmarks"
-        android:textSize="30dp"
+        android:text="@string/my_bookmarks"
+        android:textSize="30sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:textColor="@color/black"
@@ -21,9 +21,9 @@
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="@string/add"
         android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/tvTitle"
+        android:layout_toEndOf="@+id/tvTitle"
         />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -1,6 +1,7 @@
 package com.gregorius.mcslecproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,28 +16,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> {
 
-    protected static Context ctx;
-    private ArrayList<MediaResponse> listMedia;
+    protected Context context;
+    private Vector<MediaResponse> listMedia;
 
-    public MediaAdapter(Context ctx) {
-        MediaAdapter.ctx = ctx;
-        listMedia = new ArrayList<>();
+    public MediaAdapter(Context context) {
+        this.context = context;
+        listMedia = new Vector<>();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(MediaAdapter.ctx).inflate(R.layout.item_row_media, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.item_row_media, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MediaAdapter.ViewHolder holder, int position) {
         MediaResponse media = getListMedia().get(position);
-        Glide.with(ctx).load(media.getArtworkUrl100()).into(holder.artworkUrl100);
+        Glide.with(context).load(media.getArtworkUrl100()).into(holder.artworkUrl100);
 
         holder.trackId.setText(String.valueOf(media.getTrackId()));
         holder.trackName.setText(media.getTrackName());
@@ -45,7 +47,12 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
         holder.cvMedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ctx,"" + media.getTrackName(), Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(context, TrackDetailActivity.class);
+                intent.putExtra(TrackDetailActivity.KEY_TRACK, media);
+                intent.putExtra(TrackDetailActivity.KEY_SENDER_ACTIVITY, context.getClass().getSimpleName());
+                context.startActivity(intent);
+//                Toast.makeText(context,"" + media.getTrackName(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -55,11 +62,11 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
         return listMedia.size();
     }
 
-    public ArrayList<MediaResponse> getListMedia() {
+    public Vector<MediaResponse> getListMedia() {
         return listMedia;
     }
 
-    public void setListMedia(ArrayList<MediaResponse> listMedia) {
+    public void setListMedia(Vector<MediaResponse> listMedia) {
         this.listMedia = listMedia;
         notifyDataSetChanged();
     }
@@ -84,7 +91,6 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                 }
             });
         }

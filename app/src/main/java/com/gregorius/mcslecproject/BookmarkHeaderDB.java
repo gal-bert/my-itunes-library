@@ -7,64 +7,74 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.Vector;
 
-public class BookmarkHeaderDB {
+public class BookmarkHeaderDB
+{
     public DBHelper dbHelper;
 
-    public BookmarkHeaderDB(Context ctx){
+    public BookmarkHeaderDB(Context ctx)
+    {
         dbHelper = new DBHelper(ctx);
     }
 
-    public void insertBookmarkHeader(BookmarksHeader bookmarksHeader){
+    public void insertBookmarkHeader(BookmarksHeader bookmarksHeader)
+    {
 
-        SQLiteDatabase db =dbHelper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(DBHelper.FIELD_BOOKMARK_NAME, bookmarksHeader.getBookmarkName());
-        db.insert(DBHelper.TABLE_BOOKMARKS, null, cv);
+        db.insert(DBHelper.TABLE_BOOKMARKS_HEADER, null, cv);
 
         db.close();
     }
 
-    public Vector<BookmarksHeader> getBookmarks(){
+    public Vector<BookmarksHeader> getBookmarks()
+    {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        String get_product_query = "SELECT * FROM " + DBHelper.TABLE_BOOKMARKS;
-        Cursor cursor = db.rawQuery(get_product_query, null);
-
         Vector<BookmarksHeader> vecBookmark = new Vector<>();
 
-        if(cursor.moveToFirst()){
-            do{
-                Integer id = cursor.getInt(0);
-                String name = cursor.getString(1);
-                BookmarksHeader bookmarksHeader = new BookmarksHeader(id, name);
-                vecBookmark.add(bookmarksHeader);
-            }while(cursor.moveToNext());
+        Cursor cursor = db.query(DBHelper.TABLE_BOOKMARKS_HEADER, null, null, null, null, null, null);
+
+        while (cursor.moveToNext())
+        {
+            int id = cursor.getInt(cursor.getColumnIndex(DBHelper.FIELD_BOOKMARK_ID));
+            String name = cursor.getString(cursor.getColumnIndex(DBHelper.FIELD_BOOKMARK_NAME));
+
+            BookmarksHeader bookmarksHeader = new BookmarksHeader(id, name);
+            vecBookmark.add(bookmarksHeader);
         }
         cursor.close();
         db.close();
         dbHelper.close();
-        return  vecBookmark;
+        return vecBookmark;
     }
 
-    public void updateBookmark(int id, String name){
+    public void updateBookmark(int id, String name)
+    {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String update_query = "UPDATE " + DBHelper.TABLE_BOOKMARKS + " SET " +
-                DBHelper.FIELD_BOOKMARK_NAME + " = '" + name + "' " +
-                "WHERE " + DBHelper.FIELD_BOOKMARK_ID + " = " + id;
-        db.execSQL(update_query);
+
+        ContentValues cv = new ContentValues();
+        cv.put(DBHelper.FIELD_BOOKMARK_NAME, name);
+
+        String selection = DBHelper.FIELD_BOOKMARK_ID + "=?";
+        String[] selectionArgs = {Integer.toString(id)};
+
+        db.update(DBHelper.TABLE_BOOKMARKS_HEADER, cv, selection, selectionArgs);
+
         db.close();
         dbHelper.close();
     }
 
-    public void deleteBookmark(int bookmarkId){
+    public void deleteBookmark(int bookmarkId)
+    {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String delete_query = "DELETE FROM " + DBHelper.TABLE_BOOKMARKS +
-                " WHERE " + DBHelper.FIELD_BOOKMARK_ID + " = " + bookmarkId;
-        db.execSQL(delete_query);
+
+        String selection = DBHelper.FIELD_BOOKMARK_ID + "=?";
+        String[] selectionArgs = {Integer.toString(bookmarkId)};
+
+        db.delete(DBHelper.TABLE_BOOKMARKS_HEADER, selection, selectionArgs);
+
         db.close();
         dbHelper.close();
     }
-
-
 
 }

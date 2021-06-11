@@ -26,21 +26,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_gravity="center_vertical"
             >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="@string/title"
                 android:textSize="16sp"
                 android:layout_marginBottom="5dp"
                 android:id="@+id/trackName"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Artist"
+                android:text="@string/artist"
                 android:id="@+id/artistName"/>
 
         </LinearLayout>

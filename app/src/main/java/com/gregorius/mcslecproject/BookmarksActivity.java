@@ -1,10 +1,8 @@
 package com.gregorius.mcslecproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +16,10 @@ import android.widget.Toast;
 
 import java.util.Vector;
 
-public class BookmarksActivity extends AppCompatActivity {
+public class BookmarksActivity extends AppCompatActivity
+{
+    protected static final String KEY_SENDER_ACTIVITY = "senderActivity";
+    protected static final String KEY_BOOKMARK_ID = "bookmarkId";
 
     Button btnAdd, btnAddName;
     EditText etBookmarkName;
@@ -26,11 +27,15 @@ public class BookmarksActivity extends AppCompatActivity {
     BookmarkHeaderDB db;
     RecyclerView rvBookmark;
     Vector<BookmarksHeader> vecBookmark;
+    String callerActivity;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmarks);
+
+        Intent intent = getIntent();
+        callerActivity = intent.getStringExtra(KEY_SENDER_ACTIVITY);
 
         //RV BOOKMARK
         getRvData();
@@ -81,12 +86,33 @@ public class BookmarksActivity extends AppCompatActivity {
         rvBookmark.setAdapter(bookmarkHeaderAdapter);
         bookmarkHeaderAdapter.notifyDataSetChanged();
         rvBookmark.setLayoutManager(new LinearLayoutManager(this));
+
+        bookmarkHeaderAdapter.setOnItemClickListener(new BookmarkHeaderAdapter.ClickListener()
+        {
+            @Override
+            public void onItemClick(int position, View v)
+            {
+                int bookmarkId = bookmarkHeaderAdapter.getBookmarkVector().get(position).getBookmarkId();
+                if(callerActivity.contentEquals(MainActivity.class.getSimpleName()))
+                {
+                    // intent to BookmarkDetailActivity.
+                    Toast.makeText(BookmarksActivity.this, Integer.toString(bookmarkId), Toast.LENGTH_SHORT).show();
+                }
+                else if(callerActivity.contentEquals(TrackDetailActivity.class.getSimpleName()))
+                {
+                    Intent intent = new Intent();
+                    intent.putExtra(KEY_BOOKMARK_ID, bookmarkId);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            }
+        });
     }
+
 
     public void refresh(){
         finish();
         startActivity(getIntent());
         overridePendingTransition(0,0);
     }
-
 }

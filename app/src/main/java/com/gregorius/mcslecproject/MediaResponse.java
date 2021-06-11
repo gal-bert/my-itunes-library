@@ -3,7 +3,10 @@ package com.gregorius.mcslecproject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MediaResponse {
+import java.io.Serializable;
+
+public class MediaResponse implements Serializable
+{
 
     @SerializedName("trackId")
     @Expose
@@ -29,6 +32,18 @@ public class MediaResponse {
     @SerializedName("trackPrice")
     @Expose
     private Double trackPrice;
+
+    public MediaResponse(Integer trackId, String artworkUrl100, String trackName, String artistName, String collectionName, String trackViewUrl, String kind, Double trackPrice)
+    {
+        this.trackId = trackId;
+        this.artworkUrl100 = artworkUrl100;
+        this.trackName = trackName;
+        this.artistName = artistName;
+        this.collectionName = collectionName;
+        this.trackViewUrl = trackViewUrl;
+        this.kind = kind;
+        this.trackPrice = trackPrice;
+    }
 
     public Integer getTrackId() {
         return trackId;
@@ -93,5 +108,4 @@ public class MediaResponse {
     public void setTrackPrice(Double trackPrice) {
         this.trackPrice = trackPrice;
     }
-
 }

@@ -9,9 +9,9 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bookmark Name: "
+        android:text="@string/bookmark_name"
         android:textColor="@color/black"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:layout_centerHorizontal="true"
         />
 
@@ -20,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="12"
+        android:inputType="textShortMessage"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/tvTitle"
         />
@@ -31,7 +32,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/etBookmarkName"
         android:onClick="addBookmark"
-        android:text="add"
+        android:text="@string/add"
         />
 
 </RelativeLayout>

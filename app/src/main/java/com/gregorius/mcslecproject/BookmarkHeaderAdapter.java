@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Vector;
 
-public class BookmarkHeaderAdapter extends RecyclerView.Adapter<BookmarkHeaderAdapter.ViewHolder> {
+public class BookmarkHeaderAdapter extends RecyclerView.Adapter<BookmarkHeaderAdapter.ViewHolder>
+{
     Context ctx;
     Vector<BookmarksHeader> vecBookmark;
     BookmarkHeaderDB db;
+    private ClickListener clickListener;
 
     public BookmarkHeaderAdapter(Context ctx) {
         this.ctx = ctx;
@@ -29,8 +31,15 @@ public class BookmarkHeaderAdapter extends RecyclerView.Adapter<BookmarkHeaderAd
     public void setVecBookmark(Vector<BookmarksHeader> vecBookmark) {
         this.vecBookmark = vecBookmark;
     }
+
+    public Vector<BookmarksHeader> getBookmarkVector()
+    {
+        return vecBookmark;
+    }
+
+    @NonNull
     @Override
-    public BookmarkHeaderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BookmarkHeaderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(ctx).inflate(R.layout.item_bookmark_header, parent, false);
         return new ViewHolder(view);
     }
@@ -89,7 +98,8 @@ public class BookmarkHeaderAdapter extends RecyclerView.Adapter<BookmarkHeaderAd
         return vecBookmark.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
 
         TextView tvBookmarkTitle;
         Button btnDelete, btnEdit;
@@ -100,6 +110,22 @@ public class BookmarkHeaderAdapter extends RecyclerView.Adapter<BookmarkHeaderAd
             cvBookmarks = itemView.findViewById(R.id.cvBookmarks);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnEdit = itemView.findViewById(R.id.btnEdit);
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v)
+        {
+            clickListener.onItemClick(getBindingAdapterPosition(), v);
+        }
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(int position, View v);
     }
 }
