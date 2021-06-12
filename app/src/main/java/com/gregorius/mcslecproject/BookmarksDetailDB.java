@@ -53,12 +53,48 @@ public class BookmarksDetailDB
         return bookmarksDetailVector;
     }
 
+    public boolean isBookmarksDetailOnTheTable(int bookmarkId, int trackId)
+    {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+
+        boolean valid = false;
+
+        String selection = DBHelper.FIELD_BOOKMARK_ID + "=? AND " + DBHelper.FIELD_TRACK_ID + "=?";
+        String[] selectionArgs = {Integer.toString(bookmarkId), Integer.toString(trackId)};
+
+        Cursor cursor = sqLiteDatabase.query(DBHelper.TABLE_BOOKMARKS_DETAIL, null, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToNext())
+        {
+            valid = true;
+        }
+
+        cursor.close();
+        sqLiteDatabase.close();
+        databaseHelper.close();
+
+        return valid;
+    }
+
     public void deleteBookmarkDetail(int bookmarkId, int trackId)
     {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         String selection = DBHelper.FIELD_BOOKMARK_ID + "=? AND " + DBHelper.FIELD_TRACK_ID + "=?";
         String[] selectionArgs = {Integer.toString(bookmarkId), Integer.toString(trackId)};
+
+        sqLiteDatabase.delete(DBHelper.TABLE_BOOKMARKS_DETAIL, selection, selectionArgs);
+
+        sqLiteDatabase.close();
+        databaseHelper.close();
+    }
+
+    public void deleteBookmarkDetail(int bookmarkId)
+    {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+
+        String selection = DBHelper.FIELD_BOOKMARK_ID + "=?";
+        String[] selectionArgs = {Integer.toString(bookmarkId)};
 
         sqLiteDatabase.delete(DBHelper.TABLE_BOOKMARKS_DETAIL, selection, selectionArgs);
 

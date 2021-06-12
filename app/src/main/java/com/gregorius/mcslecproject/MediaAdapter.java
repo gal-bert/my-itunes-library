@@ -87,12 +87,6 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
             trackName = itemView.findViewById(R.id.trackName);
             artistName = itemView.findViewById(R.id.artistName);
             cvMedia = itemView.findViewById(R.id.cvMedia);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                }
-            });
         }
     }
 }

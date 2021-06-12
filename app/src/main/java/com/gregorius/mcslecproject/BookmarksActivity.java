@@ -37,8 +37,6 @@ public class BookmarksActivity extends AppCompatActivity
         Intent intent = getIntent();
         callerActivity = intent.getStringExtra(KEY_SENDER_ACTIVITY);
 
-        //RV BOOKMARK
-        getRvData();
         //ADD BOOKMARK HEADER
         btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +59,7 @@ public class BookmarksActivity extends AppCompatActivity
                         bookmarksHeader = new BookmarksHeader(name);
                         db.insertBookmarkHeader(bookmarksHeader);
                         popupWindow.dismiss();
-                        refresh();
+                        getRvData();
                     }
                 });
 
@@ -107,12 +105,5 @@ public class BookmarksActivity extends AppCompatActivity
                 }
             }
         });
-    }
-
-
-    public void refresh(){
-        finish();
-        startActivity(getIntent());
-        overridePendingTransition(0,0);
     }
 }

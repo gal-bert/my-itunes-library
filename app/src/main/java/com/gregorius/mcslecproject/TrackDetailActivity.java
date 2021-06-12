@@ -109,7 +109,12 @@ public class TrackDetailActivity extends AppCompatActivity
                     bookmarksId = data.getIntExtra(BookmarksActivity.KEY_BOOKMARK_ID, 0);
 
                     if(mediaResponsesDB.getMediaResponses(media.getTrackId()) == null) mediaResponsesDB.insertMediaResponses(media);
-                    bookmarksDetailDB.insertBookmarksDetail(new BookmarksDetail(bookmarksId, media.getTrackId()));
+                    if(bookmarksDetailDB.isBookmarksDetailOnTheTable(bookmarksId, media.getTrackId())) Toast.makeText(this, "Track has already added the bookmark", Toast.LENGTH_SHORT).show();
+                    else
+                    {
+                        bookmarksDetailDB.insertBookmarksDetail(new BookmarksDetail(bookmarksId, media.getTrackId()));
+                        Toast.makeText(this, "Successfully added.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         }
