@@ -25,8 +25,13 @@ public class BookmarkDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bookmark_detail);
         Intent intent = getIntent();
         bookmarkId =  intent.getIntExtra(KEY_BOOKMARK_ID,0);
-        getRvData();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getRvData();
     }
 
     public void getRvData(){

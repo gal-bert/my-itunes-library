@@ -22,6 +22,8 @@ public class BookmarkDetailAdapter extends RecyclerView.Adapter<BookmarkDetailAd
     Context context;
     MediaResponsesDB db;
 
+    protected static final String KEY_BOOKMARK_ID = "bookmarkId";
+
     public void setVecBookmarkDetail(Vector<BookmarksDetail> vecBookmarkDetail) {
         this.vecBookmarkDetail = vecBookmarkDetail;
     }
@@ -52,10 +54,10 @@ public class BookmarkDetailAdapter extends RecyclerView.Adapter<BookmarkDetailAd
         holder.cvMedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(context, TrackDetailActivity.class);
                 intent.putExtra(TrackDetailActivity.KEY_TRACK, media);
                 intent.putExtra(TrackDetailActivity.KEY_SENDER_ACTIVITY, context.getClass().getSimpleName());
+                intent.putExtra(KEY_BOOKMARK_ID, vecBookmarkDetail.get(position).getBookmarkId());
                 context.startActivity(intent);
             }
         });
