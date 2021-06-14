@@ -20,6 +20,7 @@ public class BookmarksActivity extends AppCompatActivity
 {
     protected static final String KEY_SENDER_ACTIVITY = "senderActivity";
     protected static final String KEY_BOOKMARK_ID = "bookmarkId";
+    protected static final String KEY_BOOKMARK_NAME = "bookmarkName";
 
     Button btnAdd, btnAddName;
     EditText etBookmarkName;
@@ -93,12 +94,14 @@ public class BookmarksActivity extends AppCompatActivity
             public void onItemClick(int position, View v)
             {
                 int bookmarkId = bookmarkHeaderAdapter.getBookmarkVector().get(position).getBookmarkId();
+                String bookmarkName = bookmarkHeaderAdapter.getBookmarkVector().get(position).getBookmarkName();
                 if(callerActivity.contentEquals(MainActivity.class.getSimpleName()))
                 {
                     // intent to BookmarkDetailActivity.
                     Toast.makeText(BookmarksActivity.this, Integer.toString(bookmarkId), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), BookmarkDetailActivity.class);
                     intent.putExtra(KEY_BOOKMARK_ID, bookmarkId);
+                    intent.putExtra(KEY_BOOKMARK_NAME, bookmarkName);
                     startActivity(intent);
 
                 }
