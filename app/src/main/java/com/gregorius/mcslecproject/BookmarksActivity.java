@@ -95,6 +95,10 @@ public class BookmarksActivity extends AppCompatActivity
                 {
                     // intent to BookmarkDetailActivity.
                     Toast.makeText(BookmarksActivity.this, Integer.toString(bookmarkId), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), BookmarkDetailActivity.class);
+                    intent.putExtra(KEY_BOOKMARK_ID, bookmarkId);
+                    startActivity(intent);
+
                 }
                 else if(callerActivity.contentEquals(TrackDetailActivity.class.getSimpleName()))
                 {

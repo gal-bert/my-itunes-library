@@ -19,8 +19,10 @@ import com.bumptech.glide.Glide;
 public class TrackDetailActivity extends AppCompatActivity
 {
     protected static final String KEY_SENDER_ACTIVITY = "senderActivity";
+    protected static final String KEY_BOOKMARK_ID = "bookmarkId";
     protected static final String KEY_TRACK = "track";
     protected static final int REQUEST_CODE_BOOKMARK = 1;
+
 
     Button buttonAction;
     ImageView imageViewArtwork;
@@ -28,6 +30,7 @@ public class TrackDetailActivity extends AppCompatActivity
     MediaResponse media;
     String callerActivity;
     int bookmarksId;
+    BookmarksDetailDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,7 +46,21 @@ public class TrackDetailActivity extends AppCompatActivity
         textViewType = findViewById(R.id.text_view_type);
         textViewPrice = findViewById(R.id.text_view_price);
 
+
+
         Intent intent = getIntent();
+
+        media = (MediaResponse) intent.getSerializableExtra(KEY_TRACK);
+        if (media != null)
+        {
+            textViewTrackName.setText(media.getTrackName());
+            textViewArtistName.setText(media.getArtistName());
+            textViewAlbumName.setText(media.getCollectionName());
+            textViewType.setText(media.getKind());
+            textViewPrice.setText(Double.toString(media.getTrackPrice()));
+            Glide.with(TrackDetailActivity.this).load(media.getArtworkUrl100()).into(imageViewArtwork);
+        }
+
         callerActivity = intent.getStringExtra(KEY_SENDER_ACTIVITY);
         if(callerActivity != null)
         {
@@ -69,22 +86,19 @@ public class TrackDetailActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
-
+                        int trackId = media.getTrackId();
+                        Intent intent1 = getIntent();
+                        int bookmarkId = intent1.getIntExtra(KEY_BOOKMARK_ID,0);
+                        db = new BookmarksDetailDB(getApplicationContext());
+                        db.deleteBookmarkDetail(bookmarkId, trackId);
+                        Toast.makeText(getApplicationContext(), "Removed", Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 });
             }
         }
 
-        media = (MediaResponse) intent.getSerializableExtra(KEY_TRACK);
-        if (media != null)
-        {
-            textViewTrackName.setText(media.getTrackName());
-            textViewArtistName.setText(media.getArtistName());
-            textViewAlbumName.setText(media.getCollectionName());
-            textViewType.setText(media.getKind());
-            textViewPrice.setText(Double.toString(media.getTrackPrice()));
-            Glide.with(TrackDetailActivity.this).load(media.getArtworkUrl100()).into(imageViewArtwork);
-        }
+
     }
 
     public void viewOnItunes(View view)
