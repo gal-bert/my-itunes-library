@@ -15,7 +15,8 @@
             android:id="@+id/image_view_artwork"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"/>
 
         <TextView
             android:id="@+id/text_view_track_name"
@@ -33,6 +34,7 @@
             android:layout_below="@id/text_view_track_name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/artist"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -110,7 +112,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/grid_layout_detail"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="40dp"
+            android:backgroundTint="#20C997"/>
 
         <Button
             android:id="@+id/view_on_iTunes"
@@ -119,6 +122,8 @@
             android:layout_below="@id/button_action"
             android:layout_centerHorizontal="true"
             android:onClick="viewOnItunes"
-            android:text="@string/view_on_itunes" />
+            android:text="@string/view_on_itunes"
+            android:textColor="#20C997"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
     </RelativeLayout>
 </ScrollView>

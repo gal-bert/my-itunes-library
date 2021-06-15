@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookmarksActivity">
+    tools:context=".BookmarksActivity"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -12,26 +13,35 @@
         android:layout_height="wrap_content"
         android:text="@string/my_bookmarks"
         android:textSize="30sp"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
         />
 
-    <Button
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageButton
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add"
-        android:layout_marginTop="20dp"
-        android:layout_toEndOf="@+id/tvTitle"
+        android:drawableEnd="@drawable/ic_baseline_add_24"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#20C997"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_baseline_add_24"
+        android:background="@drawable/rounded_btn"
         />
+
+    </RelativeLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBookmarks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitle"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         />
 
-</RelativeLayout>
+</LinearLayout>
