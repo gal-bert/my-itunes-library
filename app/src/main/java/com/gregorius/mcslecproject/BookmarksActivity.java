@@ -73,7 +73,7 @@ public class BookmarksActivity extends AppCompatActivity
                 btnAddName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(),"Added",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Bookmark Created",Toast.LENGTH_SHORT).show();
                         String name = etBookmarkName.getText().toString();
                         bookmarksHeader = new BookmarksHeader(name);
                         db.insertBookmarkHeader(bookmarksHeader);
@@ -114,7 +114,7 @@ public class BookmarksActivity extends AppCompatActivity
                 if(callerActivity.contentEquals(MainActivity.class.getSimpleName()))
                 {
                     // intent to BookmarkDetailActivity.
-                    Toast.makeText(BookmarksActivity.this, Integer.toString(bookmarkId), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(BookmarksActivity.this, Integer.toString(bookmarkId), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), BookmarkDetailActivity.class);
                     intent.putExtra(KEY_BOOKMARK_ID, bookmarkId);
                     intent.putExtra(KEY_BOOKMARK_NAME, bookmarkName);

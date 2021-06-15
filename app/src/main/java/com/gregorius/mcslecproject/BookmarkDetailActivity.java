@@ -34,7 +34,7 @@ public class BookmarkDetailActivity extends AppCompatActivity {
         bookmarkId =  intent.getIntExtra(KEY_BOOKMARK_ID,0);
         bookmarkName = intent.getStringExtra(KEY_BOOKMARK_NAME);
 
-        tvBookmarkDetailTitle.setText(bookmarkName + " Bookmark");
+        tvBookmarkDetailTitle.setText(bookmarkName);
 
     }
 

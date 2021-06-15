@@ -69,20 +69,20 @@ public class BookmarkHeaderAdapter extends RecyclerView.Adapter<BookmarkHeaderAd
             @Override
             public void onClick(View v) {
                 LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                PopupWindow popupWindow = new PopupWindow(inflater.inflate(R.layout.popup_add_bookmark, null, false),650, 300, true);
+                PopupWindow popupWindow = new PopupWindow(inflater.inflate(R.layout.popup_add_bookmark, null, false),ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
                 popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
 
                 View view = popupWindow.getContentView();
                 btnEditName = view.findViewById(R.id.btnName);
                 etBookmarkName = view.findViewById(R.id.etBookmarkName);
-                btnEditName.setText("Edit");
+                btnEditName.setText("Update");
                 etBookmarkName.setText("" + vecBookmark.get(position).getBookmarkName());
                 etBookmarkName = view.findViewById(R.id.etBookmarkName);
 
                 btnEditName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(ctx,"Edited",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ctx,"Bookmark Updated",Toast.LENGTH_LONG).show();
                         String name = etBookmarkName.getText().toString();
                         db.updateBookmark(id, name);
                         vecBookmark.get(position).setBookmarkName(name);
