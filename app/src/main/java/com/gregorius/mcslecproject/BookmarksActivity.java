@@ -78,7 +78,8 @@ public class BookmarksActivity extends AppCompatActivity
                         bookmarksHeader = new BookmarksHeader(name);
                         db.insertBookmarkHeader(bookmarksHeader);
                         popupWindow.dismiss();
-                        refresh();
+//                        refresh();
+                        getRvData();
                     }
                 });
 
@@ -133,9 +134,9 @@ public class BookmarksActivity extends AppCompatActivity
     }
 
 
-    public void refresh(){
-        finish();
-        startActivity(getIntent());
-        overridePendingTransition(0,0);
-    }
+//    public void refresh(){
+//        finish();
+//        startActivity(getIntent());
+//        overridePendingTransition(0,0);
+//    }
 }
