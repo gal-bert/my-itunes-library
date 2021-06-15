@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
+    android:layout_margin="10dp"
     >
 
     <RelativeLayout
@@ -16,22 +17,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title"
-            android:textSize="30sp"
+            android:textSize="20sp"
+            android:layout_marginTop="8dp"
             />
-        <Button
+        <ImageButton
             android:id="@+id/btnEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/edit"
             android:layout_toStartOf="@+id/btnDelete"
             android:layout_marginEnd="10dp"
+            android:backgroundTint="#0d6efd"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:background="@drawable/rounded_btn"
             />
-        <Button
+        <ImageButton
             android:id="@+id/btnDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete"
             android:layout_alignParentEnd="true"
+            android:backgroundTint="#dc3545"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:background="@drawable/rounded_btn"
             />
     </RelativeLayout>
 

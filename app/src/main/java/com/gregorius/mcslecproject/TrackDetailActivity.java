@@ -57,7 +57,7 @@ public class TrackDetailActivity extends AppCompatActivity
             textViewArtistName.setText(media.getArtistName());
             textViewAlbumName.setText(media.getCollectionName());
             textViewType.setText(media.getKind());
-            textViewPrice.setText(Double.toString(media.getTrackPrice()));
+            textViewPrice.setText("$" + media.getTrackPrice());
             Glide.with(TrackDetailActivity.this).load(media.getArtworkUrl100()).into(imageViewArtwork);
         }
 
@@ -77,7 +77,8 @@ public class TrackDetailActivity extends AppCompatActivity
                         startActivityForResult(intent, REQUEST_CODE_BOOKMARK);
                     }
                 });
-            } else
+            }
+            else
             {
                 // from BookmarkDetailActivity. Please specify the class in the else by changing it to else if.
                 buttonAction.setText("Remove from Bookmark");

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MCS LEC Project</string>
+    <string name="app_name">My iTunes Library</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
