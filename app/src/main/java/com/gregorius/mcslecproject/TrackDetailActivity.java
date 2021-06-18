@@ -19,7 +19,6 @@ import com.bumptech.glide.Glide;
 public class TrackDetailActivity extends AppCompatActivity
 {
     protected static final String KEY_SENDER_ACTIVITY = "senderActivity";
-    protected static final String KEY_BOOKMARK_ID = "bookmarkId";
     protected static final String KEY_TRACK = "track";
     protected static final int REQUEST_CODE_BOOKMARK = 1;
 
@@ -46,8 +45,6 @@ public class TrackDetailActivity extends AppCompatActivity
         textViewType = findViewById(R.id.text_view_type);
         textViewPrice = findViewById(R.id.text_view_price);
 
-
-
         Intent intent = getIntent();
 
         media = (MediaResponse) intent.getSerializableExtra(KEY_TRACK);
@@ -61,7 +58,7 @@ public class TrackDetailActivity extends AppCompatActivity
             Glide.with(TrackDetailActivity.this).load(media.getArtworkUrl100()).into(imageViewArtwork);
         }
 
-        callerActivity = intent.getStringExtra(KEY_SENDER_ACTIVITY);
+        callerActivity = intent.getStringExtra(BookmarksActivity.KEY_SENDER_ACTIVITY);
         if(callerActivity != null)
         {
             if (callerActivity.contentEquals(MainActivity.class.getSimpleName()))
@@ -78,7 +75,7 @@ public class TrackDetailActivity extends AppCompatActivity
                     }
                 });
             }
-            else
+            else if (callerActivity.contentEquals(BookmarkDetailActivity.class.getSimpleName()))
             {
                 // from BookmarkDetailActivity. Please specify the class in the else by changing it to else if.
                 buttonAction.setText("Remove from Bookmark");
@@ -87,19 +84,19 @@ public class TrackDetailActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
+                        MediaResponsesDB mediaResponsesDB = new MediaResponsesDB(TrackDetailActivity.this);
                         int trackId = media.getTrackId();
                         Intent intent1 = getIntent();
-                        int bookmarkId = intent1.getIntExtra(KEY_BOOKMARK_ID,0);
-                        db = new BookmarksDetailDB(getApplicationContext());
+                        int bookmarkId = intent1.getIntExtra(BookmarksActivity.KEY_BOOKMARK_ID,0);
+                        db = new BookmarksDetailDB(TrackDetailActivity.this);
                         db.deleteBookmarkDetail(bookmarkId, trackId);
+                        if(!db.isTrackInAnyBookmark(trackId)) mediaResponsesDB.deleteMediaResponses(trackId);
                         Toast.makeText(getApplicationContext(), "Removed", Toast.LENGTH_LONG).show();
                         finish();
                     }
                 });
             }
         }
-
-
     }
 
     public void viewOnItunes(View view)

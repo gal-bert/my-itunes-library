@@ -65,8 +65,8 @@ public class SettingsActivity extends AppCompatActivity {
                     Intent intent = new Intent(getActivity(), NameActivity.class);
 
                     SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
-                    editor.putString("NICKNAME", null);
-                    editor.putString("DEFAULT_SEARCH", null);
+                    editor.remove(NameActivity.KEY_NICKNAME);
+                    editor.remove(NameActivity.KEY_DEFAULT_SEARCH);
                     editor.apply();
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

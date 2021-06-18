@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        term = sPrefs.getString("DEFAULT_SEARCH", null);
+        term = sPrefs.getString(NameActivity.KEY_DEFAULT_SEARCH, null);
         if(savedInstanceState != null && savedInstanceState.containsKey(KEY_TERM)) term = savedInstanceState.getString(KEY_TERM);
 
         renderBottomNavbar();

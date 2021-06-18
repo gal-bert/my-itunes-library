@@ -50,12 +50,10 @@ public class BookmarksActivity extends AppCompatActivity
         tvTitle = findViewById(R.id.tvTitle);
 
         SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String nickname = sPrefs.getString("NICKNAME", "My");
+        String nickname = sPrefs.getString(NameActivity.KEY_NICKNAME, "My");
 
         tvTitle.setText(nickname + "'s Bookmarks");
 
-        //RV BOOKMARK
-        getRvData();
         //ADD BOOKMARK HEADER
         btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -132,11 +130,4 @@ public class BookmarksActivity extends AppCompatActivity
             }
         });
     }
-
-
-//    public void refresh(){
-//        finish();
-//        startActivity(getIntent());
-//        overridePendingTransition(0,0);
-//    }
 }

@@ -33,8 +33,8 @@ public class DBHelper extends SQLiteOpenHelper
     public static final String CREATE_BOOKMARKS_DETAIL =
             "CREATE TABLE IF NOT EXISTS " + TABLE_BOOKMARKS_DETAIL +
                     " (" +
-                    FIELD_BOOKMARK_ID + " INTEGER REFERENCES " + TABLE_BOOKMARKS_HEADER + "(" + FIELD_BOOKMARK_ID + ")," +
-                    FIELD_TRACK_ID + " INTEGER," +
+                    FIELD_BOOKMARK_ID + " INTEGER REFERENCES " + TABLE_BOOKMARKS_HEADER + "(" + FIELD_BOOKMARK_ID + ") ON UPDATE CASCADE ON DELETE CASCADE," +
+                    FIELD_TRACK_ID + " INTEGER REFERENCES " + TABLE_TRACK + "(" + FIELD_TRACK_ID + ") ON UPDATE CASCADE ON DELETE CASCADE," +
                     "PRIMARY KEY(" + FIELD_BOOKMARK_ID + ", " + FIELD_TRACK_ID + ")" +
                     " )";
 

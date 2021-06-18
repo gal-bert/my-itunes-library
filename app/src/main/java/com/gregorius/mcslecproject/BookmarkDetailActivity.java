@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class BookmarkDetailActivity extends AppCompatActivity {
 
-    protected static final String KEY_BOOKMARK_ID = "bookmarkId";
-    protected static final String KEY_BOOKMARK_NAME = "bookmarkName";
-
     Vector<BookmarksDetail> vecBookmarkDetail;
     RecyclerView rvBookmarkDetail;
     BookmarksDetailDB db;
@@ -31,8 +28,8 @@ public class BookmarkDetailActivity extends AppCompatActivity {
         tvBookmarkDetailTitle = findViewById(R.id.tvBookmarkDetailTitle);
 
         Intent intent = getIntent();
-        bookmarkId =  intent.getIntExtra(KEY_BOOKMARK_ID,0);
-        bookmarkName = intent.getStringExtra(KEY_BOOKMARK_NAME);
+        bookmarkId =  intent.getIntExtra(BookmarksActivity.KEY_BOOKMARK_ID,0);
+        bookmarkName = intent.getStringExtra(BookmarksActivity.KEY_BOOKMARK_NAME);
 
         tvBookmarkDetailTitle.setText(bookmarkName);
 

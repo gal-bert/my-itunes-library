@@ -31,7 +31,7 @@ public class BookmarksDetailDB
 
     public Vector<BookmarksDetail> getBookmarksDetail(int bookmarkId)
     {
-        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
         Vector<BookmarksDetail> bookmarksDetailVector = new Vector<>();
 
@@ -55,7 +55,7 @@ public class BookmarksDetailDB
 
     public boolean isBookmarksDetailOnTheTable(int bookmarkId, int trackId)
     {
-        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
         boolean valid = false;
 
@@ -64,10 +64,7 @@ public class BookmarksDetailDB
 
         Cursor cursor = sqLiteDatabase.query(DBHelper.TABLE_BOOKMARKS_DETAIL, null, selection, selectionArgs, null, null, null);
 
-        if (cursor.moveToNext())
-        {
-            valid = true;
-        }
+        if (cursor.moveToNext()) valid = true;
 
         cursor.close();
         sqLiteDatabase.close();
@@ -89,16 +86,23 @@ public class BookmarksDetailDB
         databaseHelper.close();
     }
 
-    public void deleteBookmarkDetail(int bookmarkId)
+    public boolean isTrackInAnyBookmark(int trackId)
     {
-        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
 
-        String selection = DBHelper.FIELD_BOOKMARK_ID + "=?";
-        String[] selectionArgs = {Integer.toString(bookmarkId)};
+        boolean valid = false;
 
-        sqLiteDatabase.delete(DBHelper.TABLE_BOOKMARKS_DETAIL, selection, selectionArgs);
+        String selection = DBHelper.FIELD_TRACK_ID + "=?";
+        String[] selectionArgs = {Integer.toString(trackId)};
 
+        Cursor cursor = sqLiteDatabase.query(DBHelper.TABLE_BOOKMARKS_DETAIL, null, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToNext()) valid = true;
+
+        cursor.close();
         sqLiteDatabase.close();
         databaseHelper.close();
+
+        return valid;
     }
 }

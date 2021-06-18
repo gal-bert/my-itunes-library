@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        String name = sPrefs.getString("NICKNAME", null);
+        String name = sPrefs.getString(NameActivity.KEY_NICKNAME, null);
 
         Thread thread = new Thread() {
             public void run() {

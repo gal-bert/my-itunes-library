@@ -14,6 +14,9 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class NameActivity extends AppCompatActivity {
 
+    public static final String KEY_NICKNAME = "NICKNAME";
+    public static final String KEY_DEFAULT_SEARCH = "DEFAULT_SEARCH";
+
     TextInputLayout nameTextField, searchTextField;
     String nickname, search;
 
@@ -46,8 +49,8 @@ public class NameActivity extends AppCompatActivity {
 
         if (!anyErrors){
             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-            editor.putString("NICKNAME", nickname);
-            editor.putString("DEFAULT_SEARCH", search);
+            editor.putString(KEY_NICKNAME, nickname);
+            editor.putString(KEY_DEFAULT_SEARCH, search);
             editor.apply();
 
             Intent intent = new Intent(NameActivity.this, MainActivity.class);
