@@ -82,12 +82,17 @@ public class BookmarkHeaderAdapter extends RecyclerView.Adapter<BookmarkHeaderAd
                 btnEditName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(ctx,"Bookmark Updated",Toast.LENGTH_LONG).show();
                         String name = etBookmarkName.getText().toString();
-                        db.updateBookmark(id, name);
-                        vecBookmark.get(position).setBookmarkName(name);
-                        popupWindow.dismiss();
-                        notifyItemChanged(position);
+                        if(name.isEmpty()){
+                            etBookmarkName.setError("Cannot be empty!");
+                            etBookmarkName.requestFocus();
+                        } else {
+                            Toast.makeText(ctx,"Bookmark Updated",Toast.LENGTH_LONG).show();
+                            db.updateBookmark(id, name);
+                            vecBookmark.get(position).setBookmarkName(name);
+                            popupWindow.dismiss();
+                            notifyItemChanged(position);
+                        }
                     }
                 });
             }

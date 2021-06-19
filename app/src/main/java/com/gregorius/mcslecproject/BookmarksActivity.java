@@ -71,13 +71,17 @@ public class BookmarksActivity extends AppCompatActivity
                 btnAddName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(),"Bookmark Created",Toast.LENGTH_SHORT).show();
                         String name = etBookmarkName.getText().toString();
-                        bookmarksHeader = new BookmarksHeader(name);
-                        db.insertBookmarkHeader(bookmarksHeader);
-                        popupWindow.dismiss();
-//                        refresh();
-                        getRvData();
+                        if(name.isEmpty()){
+                            etBookmarkName.setError("Cannot be empty!");
+                            etBookmarkName.requestFocus();
+                        } else {
+                            Toast.makeText(getApplicationContext(),"Bookmark Created",Toast.LENGTH_SHORT).show();
+                            bookmarksHeader = new BookmarksHeader(name);
+                            db.insertBookmarkHeader(bookmarksHeader);
+                            popupWindow.dismiss();
+                            getRvData();
+                        }
                     }
                 });
 

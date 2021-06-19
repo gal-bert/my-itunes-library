@@ -14,7 +14,7 @@
 
         <Preference
             app:key="RESET"
-            app:title="Reset data to factory"
+            app:title="Reset name and default search"
             >
         </Preference>
 
